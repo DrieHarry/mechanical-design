@@ -21,8 +21,16 @@
         <label>Tegangan / Kekuatan Lelah aktual </label>
 			<input type="number" step="any" min = "0" name="Sn" placeholder="MPa"><br><br>
          -->
+         <label for="id_Material">Pilih Bahan :</label>
+         <select name="material" id="">
+            {% for material in materials %}
+                <option value="{{ material.tegangan_tarik }}, {{ material.tegangan_luluh }}">{{ material }}</option>
+            {% endfor %}
+        </select>
          {{ form.as_p }}
             <input type="submit">
     </form>
+</body>
+
     <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
 {% endblock %}
