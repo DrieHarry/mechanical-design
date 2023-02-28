@@ -5,10 +5,14 @@ from .models import *
 class MyForm(forms.Form):
     N = forms.FloatField(label="Faktor Keamanan ",
                             widget=forms.NumberInput(attrs={'value': '2.0', 'min': '0'}))
+    RadioSelectDayaTorsi = forms.ChoiceField(label = "Pilih Input" ,choices=(('D','Daya'), ('T','Torsi')),
+                                             initial='D', widget=forms.RadioSelect)
     P = forms.FloatField(label="Daya ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'kW', 'min': '0'}))
+                            widget=forms.NumberInput(attrs={'placeholder': 'kW'}),required=False)
     n = forms.FloatField(label="Kecepatan Putar ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'rpm', 'min': '0'}))
+                            widget=forms.NumberInput(attrs={'placeholder': 'rpm'}),required=False)
+    T = forms.FloatField(label="Torsi ",
+                            widget=forms.NumberInput(attrs={'placeholder': 'N-mm'}),required=False)
     Material = forms.ModelChoiceField(
                             label = "Pilih Bahan :", queryset = Materials.objects.all())
     Ft = forms.FloatField(label="Gaya Tangensial Pada Elemen (Ft) ",
@@ -19,4 +23,19 @@ class MyForm(forms.Form):
                             widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0'}))
     BC = forms.FloatField(label="Jarak Antara Bantalan C ke Elemen B (BC) ",
                             widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0'}))
-
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        RadioSelectDayaTorsi = cleaned_data.get("RadioSelectDayaTorsi")
+        P = cleaned_data.get("P")
+        n = cleaned_data.get("n")
+        T = cleaned_data.get("T")
+        if RadioSelectDayaTorsi == 'D':
+            if not P:
+                raise forms.ValidationError('Daya harus diisi')
+            if not n:
+                raise forms.ValidationError('Kecepatan putar harus diisi')
+        elif RadioSelectDayaTorsi == 'T':
+            if not T:
+                raise forms.ValidationError('Torsi harus diisi')
+        return cleaned_data

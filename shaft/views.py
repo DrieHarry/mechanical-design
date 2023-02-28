@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 from .forms import *
@@ -17,6 +19,26 @@ def input(request):
     })
 
 def output(request):
+    form = MyForm(request.POST)
+    if not form.is_valid():
+        return render(request, "shaft/input.html", {
+            "form": form,
+        })
+    
+ #       cleaned_data = form.cleaned_data
+ #       N = cleaned_data.get("N")
+ #       RadioSelectDayaTorsi = cleaned_data.get("RadioSelectDayaTorsi")
+ #       P = cleaned_data.get("P")
+ #       n = cleaned_data.get("n")
+ #       T = cleaned_data.get("T")
+ #       Material = cleaned_data.get("Material")
+ #       Ft = cleaned_data.get("Ft")
+ #       Fr = cleaned_data.get("Fr")
+ #       BC = cleaned_data.get("BC")
+ #       Su = Material.tegangan_tarik
+ #       Sy = Material.tegangan_luluh
+
+
 
     N = float(request.POST['N']) #Faktor Keamanan
     P = float(request.POST['P']) #Daya
