@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 
 from .forms import *
@@ -38,15 +36,11 @@ def output(request):
  #       Su = Material.tegangan_tarik
  #       Sy = Material.tegangan_luluh
 
-
-
     N = float(request.POST['N']) #Faktor Keamanan
-    
     Ft = float(request.POST['Ft']) #Gaya Tangensial Pada Elemen
     Fr = float(request.POST['Fr']) #Gaya Radial Pada Elemen
     AB = float(request.POST['AB']) #Jarak Antara Bantalan A ke Elemen B
     BC = float(request.POST['BC']) #Jarak Antara Bantalan C ke Elemen B
-    
     RadioDayaTorsi = request.POST['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
     
     #Bahan
@@ -54,7 +48,6 @@ def output(request):
     material = Materials.objects.get(id=id)
     Su = material.tegangan_tarik
     Sy = material.tegangan_luluh
-
     
     # Menghitung Torsi
     if RadioDayaTorsi == "D":
@@ -92,6 +85,7 @@ def output(request):
                  (1100, 381), (1125, 388), (1150, 398), (1175, 402), (1200, 408), 
                  (1225, 413), (1250, 421), (1275, 425), (1300, 428), (1350, 437), 
                  (1400, 447), (1500, 457)])
+    
     # Didapat x dan y
     x = data[:, 0]
     y = data[:, 1]
@@ -99,9 +93,15 @@ def output(request):
     koefs = np.polyfit(x, y, 15)
     # Buat fungsi dari the koefisien
     poly_func = np.poly1d(koefs)
+    # Plot gambar
+    #plt.scatter(x, y)
+    #plt.plot(x, poly_func(x), c='r')
+    #plt.xlabel('x')
+    #plt.ylabel('y')
+    #plt.show()
     # Nilai Kekuatan Lelah
     S = poly_func(Su)
-    # Didapat kekuatan lelah aktual
+    # Kekuatan lelah aktual
     Sn = S * 0.75 * 0.81
 
     # Kt lokasi bantalan 2.0; roda gigi 2.5
