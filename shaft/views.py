@@ -41,12 +41,13 @@ def output(request):
 
 
     N = float(request.POST['N']) #Faktor Keamanan
-    P = float(request.POST['P']) #Daya
-    n = float(request.POST['n']) #Kecepatan Putar
+    
     Ft = float(request.POST['Ft']) #Gaya Tangensial Pada Elemen
     Fr = float(request.POST['Fr']) #Gaya Radial Pada Elemen
     AB = float(request.POST['AB']) #Jarak Antara Bantalan A ke Elemen B
     BC = float(request.POST['BC']) #Jarak Antara Bantalan C ke Elemen B
+    
+    RadioDayaTorsi = request.POST['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
     
     #Bahan
     id = request.POST['Material']
@@ -54,14 +55,21 @@ def output(request):
     Su = material.tegangan_tarik
     Sy = material.tegangan_luluh
 
+    
+    # Menghitung Torsi
+    if RadioDayaTorsi == "D":
+        P = float(request.POST['P']) #Daya
+        n = float(request.POST['n']) #Kecepatan Putar
+        T = (P * 1000 / (math.pi * n / 30) ) * 1000
+    if RadioDayaTorsi == "T":
+        Torsi = float(request.POST['T'])
+        T = Torsi
+
     # Menghitung Gaya Reaksi Tumpuan
     Az = (Ft * BC) / (AB + BC)
     Cz = (Ft * AB) / (AB + BC)
     Ay = (Fr * BC) / (AB + BC)
     Cy = (Fr * AB) / (AB + BC)
-
-    # Menghitung Torsi
-    T = (P * 1000 / (math.pi * n / 30) ) * 1000
 
     # Menghitung Gaya Geser Gabungan
     Vc_horizontal = -Az + Ft
@@ -87,11 +95,11 @@ def output(request):
     # Didapat x dan y
     x = data[:, 0]
     y = data[:, 1]
-    # Fit a polynomial of degree 15 to the data
+    # Memakai polynomial pangkat 15 ke data
     koefs = np.polyfit(x, y, 15)
     # Buat fungsi dari the koefisien
     poly_func = np.poly1d(koefs)
-    # Calculate the corresponding value of y using the polynomial function
+    # Nilai Kekuatan Lelah
     S = poly_func(Su)
     # Didapat kekuatan lelah aktual
     Sn = S * 0.75 * 0.81
