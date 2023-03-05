@@ -4,17 +4,7 @@
 
 {% block body %}
     <h1>OUTPUT PAGE</h1>
-    {{ result_a }}
-    <br>
-    {{ result_b }}
-    <br>
-    {{ result_c }}
-    <br>
-    {{ Su }}
-    <br>
-    {{ Sy }}
-    <br>
-    {{ T }}
-    <br>
-    {{ Sn }}
+    {% for result in results %}
+        <li>{{ result }}</li>
+    {% endfor %}
 {% endblock %}

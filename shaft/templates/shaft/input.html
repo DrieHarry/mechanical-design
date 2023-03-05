@@ -7,13 +7,18 @@
     <h1>INPUT PAGE</h1>
     <form action="{% url 'shaft:output' %}" method="post">
         {% csrf_token %}
+
         {{ form.non_field_errors }}
-        {{ form.N.label_tag }}
-        {{ form.N }}
+
+        <p>
+        {{ form.RadioSelectTipe.label_tag }}
+        {{ form.RadioSelectTipe }}
+        </p>
         <p>
             {{ form.RadioSelectDayaTorsi.label_tag }}
             {{ form.RadioSelectDayaTorsi }}
         </p>
+
         <div id="Daya">
             {{ form.P.label_tag }}
             {{ form.P }}
@@ -29,51 +34,75 @@
         </p>
         </div>
         <p>
-        {{ form.Material.label_tag }}
-        {{ form.Material }}
+            {{ form.Material.label_tag }}
+            {{ form.Material }}
         </p>
         <p>
-        {{ form.Ft.label_tag }}
-        {{ form.Ft }}
+            {{ form.Ft.label_tag }}
+            {{ form.Ft }}
         </p>
         <p>
-        {{ form.Fr.label_tag }}
-        {{ form.Fr }}
+            {{ form.Fr.label_tag }}
+            {{ form.Fr }}
         </p>
         <p>
-        {{ form.AB.label_tag }}
-        {{ form.AB }}
+            {{ form.Ft1.label_tag }}
+            {{ form.Ft1 }}
         </p>
         <p>
-        {{ form.BC.label_tag }}
-        {{ form.BC }}
+            {{ form.Fr1.label_tag }}
+            {{ form.Fr1 }}
+        </p>
+        <p>
+            {{ form.Ft2.label_tag }}
+            {{ form.Ft2 }}
+        </p>
+        <p>
+            {{ form.Fr2.label_tag }}
+            {{ form.Fr2 }}
+        </p>
+        <p>
+            {{ form.AB.label_tag }}
+            {{ form.AB }}
+        </p>
+        <p>
+            {{ form.BC.label_tag }}
+            {{ form.BC }}
+        </p>
+        <p>
+            {{ form.CD.label_tag }}
+            {{ form.CD }}
+        </p>
+        <p>
+            {{ form.N.label_tag }}
+            {{ form.N }}
         </p>
         <input type="submit" value="Submit"/>
     </form>
+        <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
+        <img src="{% static 'shaft/tipe2.jpg' %}" alt="tipe2" width="45%" height="auto">
+    
 
+<script>
+    var radios = document.getElementsByName('RadioSelectDayaTorsi');
+    var daya = document.getElementById('Daya');
+    var torsi = document.getElementById('Torsi');
     
-    <script>
-        var radios = document.getElementsByName('RadioSelectDayaTorsi');
-        var daya = document.getElementById('Daya');
-        var torsi = document.getElementById('Torsi');
-    
-        for(var i = 0; i < radios.length; i++) {
-            radios[i].onchange = function() {
-                if(this.value == 'D') {
-                    daya.style.display = "block";
-                    torsi.style.display = "none";
-                } else if (this.value == 'T') {
-                    daya.style.display = "none";
-                    torsi.style.display = "block";
-                }
+    for(var i = 0; i < radios.length; i++) {
+        radios[i].onchange = function() {
+            if(this.value == 'D') {
+                daya.style.display = "block";
+                torsi.style.display = "none";
+            } else if (this.value == 'T') {
+                daya.style.display = "none";
+                torsi.style.display = "block";
             }
         }
-        radios[0].checked = true;
-        torsi.style.display = "none";
+    }
+    radios[0].checked = true;
+    torsi.style.display = "none"; 
     </script>
 </body>
-
-    <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
 {% endblock %}
 
 
