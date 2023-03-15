@@ -18,21 +18,18 @@
             {{ form.RadioSelectDayaTorsi.label_tag }}
             {{ form.RadioSelectDayaTorsi }}
         </p>
-
-        <div id="Daya">
+        <p>
             {{ form.P.label_tag }}
             {{ form.P }}
+        </p>
         <p>
             {{ form.n.label_tag }}
             {{ form.n }}
         </p>
-        </div>
-        <div id="Torsi">
         <p>
             {{ form.T.label_tag }}
             {{ form.T }}
         </p>
-        </div>
         <p>
             {{ form.Material.label_tag }}
             {{ form.Material }}
@@ -87,26 +84,6 @@
     </figure>
         
     
-
-<script>
-    var radios = document.getElementsByName('RadioSelectDayaTorsi');
-    var daya = document.getElementById('Daya');
-    var torsi = document.getElementById('Torsi');
-    
-    for(var i = 0; i < radios.length; i++) {
-        radios[i].onchange = function() {
-            if(this.value == 'D') {
-                daya.style.display = "block";
-                torsi.style.display = "none";
-            } else if (this.value == 'T') {
-                daya.style.display = "none";
-                torsi.style.display = "block";
-            }
-        }
-    }
-    radios[0].checked = true;
-    torsi.style.display = "none"; 
-    </script>
 </body>
 {% endblock %}
 

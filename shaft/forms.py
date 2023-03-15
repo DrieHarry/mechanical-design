@@ -6,9 +6,9 @@ class MyForm(forms.Form):
     N = forms.FloatField(label="Faktor Keamanan ",
                             widget=forms.NumberInput(attrs={'value': '2.0', 'min': '0'}))
     RadioSelectTipe = forms.ChoiceField(label = "Pilih Tipe Poros" ,choices=(('1','Tipe 1'), ('2','Tipe 2')),
-                                             initial='D', widget=forms.RadioSelect)
+                                            initial = "1",widget=forms.RadioSelect)
     RadioSelectDayaTorsi = forms.ChoiceField(label = "Pilih Input" ,choices=(('D','Daya'), ('T','Torsi')),
-                                             initial='D', widget=forms.RadioSelect)
+                                            initial = "D", widget=forms.RadioSelect)
     P = forms.FloatField(label="Daya ",
                             widget=forms.NumberInput(attrs={'placeholder': 'kW'}),required=False)
     n = forms.FloatField(label="Kecepatan Putar ",
@@ -38,16 +38,52 @@ class MyForm(forms.Form):
     
     def clean(self):
         cleaned_data = self.cleaned_data
+        tipe = cleaned_data.get("RadioSelectTipe")
         RadioSelectDayaTorsi = cleaned_data.get("RadioSelectDayaTorsi")
         P = cleaned_data.get("P")
         n = cleaned_data.get("n")
         T = cleaned_data.get("T")
+        AB = cleaned_data.get("AB")
+        BC = cleaned_data.get("BC")
+        errors = []
         if RadioSelectDayaTorsi == 'D':
             if not P:
-                raise forms.ValidationError('Daya harus diisi')
+                errors.append('Daya harus diisi!')
             if not n:
-                raise forms.ValidationError('Kecepatan putar harus diisi')
+                errors.append('Kecepatan putar harus diisi!')
         elif RadioSelectDayaTorsi == 'T':
             if not T:
-                raise forms.ValidationError('Torsi harus diisi')
-        return cleaned_data
+                errors.append('Torsi harus diisi!')
+        if tipe == '1':
+            Ft = cleaned_data.get("Ft")
+            Fr = cleaned_data.get("Fr")
+            if not Ft:
+                errors.append('Gaya Tangensial harus diisi!')
+            if not Fr:
+                errors.append('Gaya Radial harus diisi!')
+            if not AB:
+                errors.append('Jarak Antara Titik A ke Titik B (AB) harus diisi!')
+            if not BC:
+                errors.append('Jarak Antara Titik B ke Titik C (BC) harus diisi!')
+        if tipe == '2':
+            Ft1 = cleaned_data.get("Ft1")
+            Fr1 = cleaned_data.get("Fr1")
+            Ft2 = cleaned_data.get("Ft2")
+            Fr2 = cleaned_data.get("Fr2")
+            CD = cleaned_data.get("CD")
+            if not Ft1:
+                errors.append('Gaya Tangensial harus diisi!')
+            if not Fr1:
+                errors.append('Gaya Radial harus diisi!')
+            if not Ft2:
+                errors.append('Gaya Tangensial harus diisi!')
+            if not Fr2:
+                errors.append('Gaya Radial harus diisi!')
+            if not AB:
+                errors.append('Jarak Antara Titik A ke Titik B (AB) harus diisi!')
+            if not BC:
+                errors.append('Jarak Antara Titik B ke Titik C (BC) harus diisi!')
+            if not CD:
+                errors.append('Jarak Antara Titik C ke Titik D (CD) harus diisi!')
+        if errors:
+            raise forms.ValidationError(errors)
