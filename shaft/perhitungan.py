@@ -49,7 +49,7 @@ def kekuatan_lelah_aktual(Su):
     y = data[:, 1]
     # Memakai polynomial pangkat 15 ke data
     koefs = np.polyfit(x, y, 15)
-    # Buat fungsi dari the koefisien
+    # Buat fungsi dari koefisien
     poly_func = np.poly1d(koefs)
     # Plot gambar
     #plt.scatter(x, y)
@@ -158,3 +158,42 @@ def tipe2(request):
     result_d = math.sqrt((2.94 * 2.0 * Vcd_total * N) / Sn)
 
     return result_a, result_b, result_c, result_d
+
+
+def get_recap(request):
+    N = float(request.POST['N']) #Faktor Keamanan
+    AB = float(request.POST['AB']) #Jarak Antara Bantalan A ke Elemen B
+    BC = float(request.POST['BC']) #Jarak Antara Bantalan C ke Elemen B
+    RadioDayaTorsi = request.POST['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
+
+    # Bahan
+    id = request.POST['Material']
+    material = Materials.objects.get(id=id)
+    Su = material.tegangan_tarik
+    Sy = material.tegangan_luluh
+    
+    RadioTipe = request.POST['RadioSelectTipe']
+    if RadioTipe == "1":
+        Ft = float(request.POST['Ft']) #Gaya Tangensial Pada Elemen
+        Fr = float(request.POST['Fr']) #Gaya Radial Pada Elemen
+        if RadioDayaTorsi == "D":
+            P = float(request.POST['P']) #Daya
+            n = float(request.POST['n']) #Kecepatan Putar
+            return N, P, n, Ft, Fr, AB, BC, material
+        if RadioDayaTorsi == "T":
+            Torsi = float(request.POST['T'])
+            return N, Torsi, Ft, Fr, AB, BC, material
+    
+    if RadioTipe == "2":
+        Ft1 = float(request.POST['Ft1']) #Gaya Tangensial Pada Elemen
+        Fr1 = float(request.POST['Fr1']) #Gaya Radial Pada Elemen
+        Ft2 = float(request.POST['Ft2']) #Gaya Tangensial Pada Elemen
+        Fr2 = float(request.POST['Fr2']) #Gaya Radial Pada Elemen
+        CD = float(request.POST['CD']) #Jarak Antara Bantalan C ke Elemen B
+        if RadioDayaTorsi == "D":
+            P = float(request.POST['P']) #Daya
+            n = float(request.POST['n']) #Kecepatan Putar
+            return N, P, n, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, material
+        if RadioDayaTorsi == "T":
+            Torsi = float(request.POST['T'])
+            return N, Torsi, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, material

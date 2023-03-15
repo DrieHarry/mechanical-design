@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
-        
-        <!--  <script>
-            const radio1 = document.querySelector("#id_RadioSelectDayaTorsi_0");
-            const radio2 = document.querySelector("#id_RadioSelectDayaTorsi_1");
-            const formOption1 = document.querySelector("#formOption1");
-            const formOption2 = document.querySelector("#formOption2");
-          
-            radio1.addEventListener("click", () => {
-              formOption1.style.display = "block";
-              formOption2.style.display = "none";
-            });
-          
-            radio2.addEventListener("click", () => {
-              formOption1.style.display = "none";
-              formOption2.style.display = "block";
-            });
-          </script> -->
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <nav>
         <a href="{% url 'home:home' %}" > Home</a>

@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from .forms import *
 from .models import *
-from .perhitungan import tipe1, tipe2
+from .perhitungan import tipe1, tipe2, get_recap
 
 
 import math
@@ -29,16 +29,20 @@ def output(request):
 
     if RadioTipe == "1":
         results = tipe1(request)
+        recaps = get_recap(request)
 
         return render(request, "shaft/output.html", {
             "results": results,
+            "recaps": recaps,
         })
 
     if RadioTipe == "2":
         results = tipe2(request)
+        recaps = get_recap(request)
 
         return render(request, "shaft/output.html", {
             "results": results,
+            "recaps": recaps,
         })
 
 
