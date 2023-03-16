@@ -4,87 +4,109 @@
         {% block title %}Input Form{% endblock %}
 
 {% block body %}
-    <h1>Input Form</h1>
-    <form action="{% url 'shaft:output' %}" method="post">
-        {% csrf_token %}
+<div class="pagetitle">
+    <h1>Input Page</h1>
+    <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">Shaft</li>
+          <li class="breadcrumb-item active">Input Page</li>
+        </ol>
+    </nav>
+</div>
 
-        {{ form.non_field_errors }}
+<section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Silahkan Isi Data</h5>
+                <form class="row g-3" action="{% url 'shaft:output' %}" method="post">
+                    {% csrf_token %}
 
-        <p>
-        {{ form.RadioSelectTipe.label_tag }}
-        {{ form.RadioSelectTipe }}
-        </p>
-        <p>
-            {{ form.RadioSelectDayaTorsi.label_tag }}
-            {{ form.RadioSelectDayaTorsi }}
-        </p>
-        <p>
-            {{ form.P.label_tag }}
-            {{ form.P }}
-        </p>
-        <p>
-            {{ form.n.label_tag }}
-            {{ form.n }}
-        </p>
-        <p>
-            {{ form.T.label_tag }}
-            {{ form.T }}
-        </p>
-        <p>
-            {{ form.Material.label_tag }}
-            {{ form.Material }}
-        </p>
-        <p>
-            {{ form.Ft.label_tag }}
-            {{ form.Ft }}
-        </p>
-        <p>
-            {{ form.Fr.label_tag }}
-            {{ form.Fr }}
-        </p>
-        <p>
-            {{ form.Ft1.label_tag }}
-            {{ form.Ft1 }}
-        </p>
-        <p>
-            {{ form.Fr1.label_tag }}
-            {{ form.Fr1 }}
-        </p>
-        <p>
-            {{ form.Ft2.label_tag }}
-            {{ form.Ft2 }}
-        </p>
-        <p>
-            {{ form.Fr2.label_tag }}
-            {{ form.Fr2 }}
-        </p>
-        <p>
-            {{ form.AB.label_tag }}
-            {{ form.AB }}
-        </p>
-        <p>
-            {{ form.BC.label_tag }}
-            {{ form.BC }}
-        </p>
-        <p>
-            {{ form.CD.label_tag }}
-            {{ form.CD }}
-        </p>
-        <p>
-            {{ form.N.label_tag }}
-            {{ form.N }}
-        </p>
-        <input type="submit" value="Submit"/>
-    </form>
-    <figure>
-        <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
-    </figure>
-    <figure>
-        <img src="{% static 'shaft/tipe2.jpg' %}" alt="tipe2" width="45%" height="auto">
-    </figure>
-        
-    
-</body>
+                    {{ form.non_field_errors }}
+
+                    <div class="col-12">
+                        <label class="form-label">{{ form.RadioSelectTipe.label }}</label>
+                        {{ form.RadioSelectTipe }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.RadioSelectDayaTorsi.label }}</label>
+                        {{ form.RadioSelectDayaTorsi }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.P.label }}</label>
+                        {{ form.P }}
+                    </div>
+                   
+                    <div class="col-12">
+                        <label class="form-label">{{ form.n.label }}</label>
+                        {{ form.n }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.T.label }}</label>
+                        {{ form.T }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Material.label }}</label>
+                        {{ form.Material }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Ft.label }}</label>
+                        {{ form.Ft }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Fr.label }}</label>
+                        {{ form.Fr }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Ft1.label }}</label>
+                        {{ form.Ft1 }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Fr1.label }}</label>
+                        {{ form.Fr1 }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Ft2.label }}</label>
+                        {{ form.Ft2 }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.Fr2.label }}</label>
+                        {{ form.Fr2 }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.AB.label }}</label>
+                        {{ form.AB }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.BC.label }}</label>
+                        {{ form.BC }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.CD.label }}</label>
+                        {{ form.CD }}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{ form.N.label }}</label>
+                        {{ form.N }}
+                    </div>
+                    <div class="text-center">
+                        <input class="btn btn-primary" type="submit" value="Submit"/>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+                <figure>
+                    <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
+                </figure>
+                <figure>
+                    <img src="{% static 'shaft/tipe2.jpg' %}" alt="tipe2" width="45%" height="auto">
+                </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
 {% endblock %}
 
 

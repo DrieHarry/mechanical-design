@@ -4,37 +4,37 @@ from .models import *
 
 class MyForm(forms.Form):
     N = forms.FloatField(label="Faktor Keamanan ",
-                            widget=forms.NumberInput(attrs={'value': '2.0', 'min': '0'}))
+                            widget=forms.NumberInput(attrs={'value': '2.0', 'min': '0', 'class':'form-control'}))
     RadioSelectTipe = forms.ChoiceField(label = "Pilih Tipe Poros" ,choices=(('1','Tipe 1'), ('2','Tipe 2')),
                                             initial = "1",widget=forms.RadioSelect)
     RadioSelectDayaTorsi = forms.ChoiceField(label = "Pilih Input" ,choices=(('D','Daya'), ('T','Torsi')),
                                             initial = "D", widget=forms.RadioSelect)
     P = forms.FloatField(label="Daya ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'kW'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'kW', 'class':'form-control'}),required=False)
     n = forms.FloatField(label="Kecepatan Putar ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'rpm'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'rpm', 'class':'form-control'}),required=False)
     T = forms.FloatField(label="Torsi ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N-mm'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'N-mm', 'class':'form-control'}),required=False)
     Material = forms.ModelChoiceField(
-                            label = "Pilih Bahan :", queryset = Materials.objects.all(),required=False)
+                            label = "Pilih Bahan :", queryset = Materials.objects.all(),required=False,widget=forms.Select(attrs={'class': 'form-select'}))
     Ft = forms.FloatField(label="Gaya Tangensial Pada Elemen (Ft) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     Fr = forms.FloatField(label="Gaya Radial Pada Elemen (Fr) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     Ft1 = forms.FloatField(label="Gaya Tangensial Pada Elemen 1 (Ft1) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     Fr1 = forms.FloatField(label="Gaya Radial Pada Elemen 1 (Fr1) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     Ft2 = forms.FloatField(label="Gaya Tangensial Pada Elemen 2 (Ft2) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     Fr2 = forms.FloatField(label="Gaya Radial Pada Elemen 2 (Fr2) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'N', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'Newton', 'min': '0', 'class':'form-control'}),required=False)
     AB = forms.FloatField(label="Jarak Antara Titik A ke Titik B (AB) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0', 'class':'form-control'}),required=False)
     BC = forms.FloatField(label="Jarak Antara Titik C ke Titik B (BC) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0', 'class':'form-control'}),required=False)
     CD = forms.FloatField(label="Jarak Antara Titik C ke Titik D (CD) ",
-                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0'}),required=False)
+                            widget=forms.NumberInput(attrs={'placeholder': 'mm', 'min': '0', 'class':'form-control'}),required=False)
     
     def clean(self):
         cleaned_data = self.cleaned_data
