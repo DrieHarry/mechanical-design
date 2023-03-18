@@ -6,9 +6,9 @@ class MyForm(forms.Form):
     N = forms.FloatField(label="Faktor Keamanan ",
                             widget=forms.NumberInput(attrs={'value': '2.0', 'min': '0', 'class':'form-control'}))
     RadioSelectTipe = forms.ChoiceField(label = "Pilih Tipe Poros" ,choices=(('1','Tipe 1'), ('2','Tipe 2')),
-                                            initial = "1",widget=forms.RadioSelect)
+                                            initial = "",widget=forms.RadioSelect,required=False)
     RadioSelectDayaTorsi = forms.ChoiceField(label = "Pilih Input" ,choices=(('D','Daya'), ('T','Torsi')),
-                                            initial = "D", widget=forms.RadioSelect)
+                                            initial = "", widget=forms.RadioSelect,required=False)
     P = forms.FloatField(label="Daya ",
                             widget=forms.NumberInput(attrs={'placeholder': 'kW', 'class':'form-control'}),required=False)
     n = forms.FloatField(label="Kecepatan Putar ",
@@ -46,6 +46,10 @@ class MyForm(forms.Form):
         AB = cleaned_data.get("AB")
         BC = cleaned_data.get("BC")
         errors = []
+        if not tipe:
+            errors.append('Pilih Tipe!')
+        if not RadioSelectDayaTorsi:
+            errors.append('Pilih Input Daya/Torsi!')
         if RadioSelectDayaTorsi == 'D':
             if not P:
                 errors.append('Daya harus diisi!')

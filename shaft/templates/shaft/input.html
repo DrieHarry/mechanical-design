@@ -5,26 +5,29 @@
 
 {% block body %}
 <div class="pagetitle">
-    <h1>Input Page</h1>
+    <h1>Halaman Input</h1>
     <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Home</li>
           <li class="breadcrumb-item">Shaft</li>
-          <li class="breadcrumb-item active">Input Page</li>
+          <li class="breadcrumb-item active">Input</li>
         </ol>
     </nav>
 </div>
 
 <section class="section">
     <div class="row">
+      <!-- ======= Form Card ======= -->
       <div class="col-lg-6">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Silahkan Isi Data</h5>
                 <form class="row g-3" action="{% url 'shaft:output' %}" method="post">
                     {% csrf_token %}
-
-                    {{ form.non_field_errors }}
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-warning">{{ form.non_field_errors }}</div>
+                    {% endif %}
 
                     <div class="col-12">
                         <label class="form-label">{{ form.RadioSelectTipe.label }}</label>
@@ -34,16 +37,16 @@
                         <label class="form-label">{{ form.RadioSelectDayaTorsi.label }}</label>
                         {{ form.RadioSelectDayaTorsi }}
                     </div>
-                    <div class="col-12">
+                    <div class="daya col-12">
                         <label class="form-label">{{ form.P.label }}</label>
                         {{ form.P }}
                     </div>
                    
-                    <div class="col-12">
+                    <div class="daya col-12">
                         <label class="form-label">{{ form.n.label }}</label>
                         {{ form.n }}
                     </div>
-                    <div class="col-12">
+                    <div class="torsi col-12">
                         <label class="form-label">{{ form.T.label }}</label>
                         {{ form.T }}
                     </div>
@@ -51,27 +54,27 @@
                         <label class="form-label">{{ form.Material.label }}</label>
                         {{ form.Material }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe1 col-12">
                         <label class="form-label">{{ form.Ft.label }}</label>
                         {{ form.Ft }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe1 col-12">
                         <label class="form-label">{{ form.Fr.label }}</label>
                         {{ form.Fr }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe2 col-12">
                         <label class="form-label">{{ form.Ft1.label }}</label>
                         {{ form.Ft1 }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe2 col-12">
                         <label class="form-label">{{ form.Fr1.label }}</label>
                         {{ form.Fr1 }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe2 col-12">
                         <label class="form-label">{{ form.Ft2.label }}</label>
                         {{ form.Ft2 }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe2 col-12">
                         <label class="form-label">{{ form.Fr2.label }}</label>
                         {{ form.Fr2 }}
                     </div>
@@ -83,7 +86,7 @@
                         <label class="form-label">{{ form.BC.label }}</label>
                         {{ form.BC }}
                     </div>
-                    <div class="col-12">
+                    <div class="tipe2 col-12">
                         <label class="form-label">{{ form.CD.label }}</label>
                         {{ form.CD }}
                     </div>
@@ -93,15 +96,29 @@
                     </div>
                     <div class="text-center">
                         <input class="btn btn-primary" type="submit" value="Submit"/>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <input class="btn btn-secondary" type="reset" value=" Reset "/>
                     </div>
                 </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Gambar Card ======= -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="tipe1">
+                <h5 class="card-title">Poros Tipe 1</h5>
                 <figure>
-                    <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="40%" height="auto">
+                    <img src="{% static 'shaft/tipe1.jpg' %}" alt="tipe1" width="85%" height="auto" class="mx-auto d-block">
                 </figure>
+            </div>
+            <div class="tipe2">
+                <h5 class="card-title">Poros Tipe 2</h5>
                 <figure>
-                    <img src="{% static 'shaft/tipe2.jpg' %}" alt="tipe2" width="45%" height="auto">
+                    <img src="{% static 'shaft/tipe2.jpg' %}" alt="tipe2" width="91%" height="auto" class="mx-auto d-block">
                 </figure>
+            </div>
           </div>
         </div>
       </div>

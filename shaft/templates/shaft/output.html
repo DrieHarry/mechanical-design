@@ -3,50 +3,89 @@
         {% block title %}Output{% endblock %}
 
 {% block body %}
-    <h1>Input Data</h1>
-    {% if recaps|length == 8 %}
-        <li>Faktor Keamanan : {{ recaps.0 }}</li>
-        <li>Daya : {{ recaps.1 }} kW</li>
-        <li>Kecepatan Putar : {{ recaps.2 }} RPM</li>
-        <li>Gaya Tangensial : {{ recaps.3 }} Newton</li>
-        <li>Gaya Radial : {{ recaps.4 }} Newton</li>
-        <li>Jarak Antara Elemen A ke Elemen B : {{ recaps.5 }} mm</li>
-        <li>Jarak Antara Elemen B ke Elemen C : {{ recaps.6 }} mm</li>
-        <li>Material {{ recaps.7 }}</li>
-    {% elif recaps|length == 7 %}
-        <li>Faktor Keamanan : {{ recaps.0 }}</li>
-        <li>Torsi : {{ recaps.1 }} kW</li>
-        <li>Gaya Tangensial : {{ recaps.2 }} Newton</li>
-        <li>Gaya Radial : {{ recaps.3 }} Newton</li>
-        <li>Jarak Antara Elemen A ke Elemen B : {{ recaps.4 }} mm</li>
-        <li>Jarak Antara Elemen B ke Elemen C : {{ recaps.5 }} mm</li>
-        <li>Material {{ recaps.6 }}</li>
-    {% elif recaps|length == 11 %}
-        <li>Faktor Keamanan : {{ recaps.0 }}</li>
-        <li>Daya : {{ recaps.1 }} kW</li>
-        <li>Kecepatan Putar : {{ recaps.2 }} RPM</li>
-        <li>Gaya Tangensial Pada Elemen 1 : {{ recaps.3 }} Newton</li>
-        <li>Gaya Radial Pada Elemen 1 : {{ recaps.4 }} Newton</li>
-        <li>Gaya Tangensial Pada Elemen 2 : {{ recaps.5 }} Newton</li>
-        <li>Gaya Radial Pada Elemen 2 : {{ recaps.6 }} Newton</li>
-        <li>Jarak Antara Elemen A ke Elemen B : {{ recaps.7 }} mm</li>
-        <li>Jarak Antara Elemen B ke Elemen C : {{ recaps.8 }} mm</li>
-        <li>Jarak Antara Elemen C ke Elemen D : {{ recaps.9 }} mm</li>
-        <li>Material {{ recaps.10 }}</li>
-    {% elif recaps|length == 10 %}
-        <li>Faktor Keamanan : {{ recaps.0 }}</li>
-        <li>Torsi : {{ recaps.1 }} kW</li>
-        <li>Gaya Tangensial Pada Elemen 1 : {{ recaps.2 }} Newton</li>
-        <li>Gaya Radial Pada Elemen 1 : {{ recaps.3 }} Newton</li>
-        <li>Gaya Tangensial Pada Elemen 2 : {{ recaps.4 }} Newton</li>
-        <li>Gaya Radial Pada Elemen 2 : {{ recaps.5 }} Newton</li>
-        <li>Jarak Antara Elemen A ke Elemen B : {{ recaps.6 }} mm</li>
-        <li>Jarak Antara Elemen B ke Elemen C : {{ recaps.7 }} mm</li>
-        <li>Jarak Antara Elemen C ke Elemen D : {{ recaps.8 }} mm</li>
-        <li>Material {{ recaps.9 }}</li>
-    {% endif %}
-    <h1>Result</h1>
-    {% for result in results %}
-        <li>{{ result }}</li>
-    {% endfor %}
+<div class="pagetitle">
+    <h1>Output</h1>
+    <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">Shaft</li>
+          <li class="breadcrumb-item">Input</li>
+          <li class="breadcrumb-item active">Output</li>
+        </ol>
+    </nav>
+</div>
+<section class="section">
+    <div class="row">
+      <!-- ======= Result Card ======= -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Diameter Minimum Pada Tiap Titik</h5>
+                {% for result in results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- ======= Data Input Card ======= -->
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Input Data</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Input</th>
+                    <th scope="col">Nilai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if recaps|length == 8 %}
+                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                    <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
+                    <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
+                    <tr><td>Gaya Tangensial</td><td>{{ recaps.3 }}</td></tr>
+                    <tr><td>Gaya Radial</td><td>{{ recaps.4 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.5 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.6 }}</td></tr>
+                    <tr><td>Material</td><td>{{ recaps.7 }}</td></tr>
+                  {% elif recaps|length == 7 %}
+                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                    <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
+                    <tr><td>Gaya Tangensial</td><td>{{ recaps.2 }}</td></tr>
+                    <tr><td>Gaya Radial</td><td>{{ recaps.3 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.4 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.5 }}</td></tr>
+                    <tr><td>Material</td><td>{{ recaps.6 }}</td></tr>
+                  {% elif recaps|length == 11 %}
+                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                    <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
+                    <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
+                    <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
+                    <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.4 }}</td></tr>
+                    <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
+                    <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.6 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.7 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.8 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.9 }}</td></tr>
+                    <tr><td>Material</td><td>{{ recaps.10 }}</td></tr>
+                  {% elif recaps|length == 10 %}
+                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                    <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
+                    <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.2 }}</td></tr>
+                    <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
+                    <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.4 }}</td></tr>
+                    <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.6 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.7 }}</td></tr>
+                    <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.8 }}</td></tr>
+                    <tr><td>Material</td><td>{{ recaps.9 }}</td></tr>
+                  {% endif %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+</section>
+    
 {% endblock %}
