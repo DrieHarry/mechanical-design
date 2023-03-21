@@ -1,12 +1,121 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-    </head>
-    <nav>
-    </nav>
-    <body>
-        <h1>HOME PAGE</h1>
-        <a href="{% url 'shaft:input' %}" > Input</a>
-    </body>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solver-Shaft</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- ======= External CSS Files ======= -->
+    <link rel="stylesheet" href="{% static 'shaft/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shaft/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'shaft/vendor/aos/aos.css' %}">
+    <!-- ======= Main CSS Files ======= -->
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  </head>
+  <body>
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center" data-aos="fade">
+        <div class="container pt-5 my-5 text-center border-bottom">
+            <div class="logo-container mx-auto mb-3" data-aos="fade-up" data-aos-duration="1500">
+                <a href="{% url 'home:home' %}" class="logo d-flex align-items-center">
+                  <img src="{% static 'home/logo.png' %}" alt="">
+                  <span class="display-4 fw-bold">Solver-Shaft</span>
+                </a>
+            </div>
+            <div class="col-lg-6 mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500">
+                <p class="hero-text lead mb-4">Solusi Desain Poros Mekanis. Aplikasi untuk menghasilkan desain poros mekanis berdasarkan input pengguna dan prinsip-prinsip dari buku Machine Elements in Mechanical Design oleh Robert L. Mott.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                    <a href="{% url 'shaft:input' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Mulai Desain</a>
+                    <a href="{% url 'shaft:about' %}" class="btn btn-secondary btn-lg px-4">Pelajari lebih lanjut</a>
+                </div>
+            </div>
+            <div class="overflow-hidden" style="max-height: 30vh;">
+                <div class="container px-5" data-aos="fade-left" data-aos-duration="1500">
+                    <img src="{% static 'home/hero-image.png' %}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======= Fitur Section ======= -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-box" data-aos="fade-up">
+                        <i class="bi bi-check2-circle"></i>
+                        <h3 class="feature-title">Mudah Digunakan</h3>
+                        <p class="feature-text">Antarmuka yang ramah pengguna dan mudah dipahami, menjadikan Solver-Shaft alat yang mudah digunakan untuk desain poros mekanis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-speedometer2"></i>
+                        <h3 class="feature-title">Cepat dan Efisien</h3>
+                        <p class="feature-text">Solver-Shaft dirancang untuk memberikan hasil yang cepat dan efisien, sehingga Anda dapat segera melihat hasil desain poros Anda.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-book"></i>
+                        <h3 class="feature-title">Berdasarkan Prinsip yang Terbukti</h3>
+                        <p class="feature-text">Dibangun berdasarkan prinsip-prinsip yang terdapat dalam buku Machine Elements in Mechanical Design oleh Robert L. Mott, Solver-Shaft menjamin keandalan desain poros Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======= Tentang Section ======= -->
+    <section class="tentang">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>About Us</h2>
+            </div>
+        <div class="row">
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="profil-item">
+                    <img src="{% static 'shaft/img/profil-1.jpg' %}" class="profil-img" alt="">
+                    <h3>...</h3>
+                    <p class="profil-text">.......................</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="profil-item">
+                    <img src="{% static 'shaft/img/profil-2.jpg' %}" class="profil-img" alt="">
+                    <h3>...</h3>
+                    <p class="profil-text">.......................</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="profil-item">
+                    <img src="{% static 'shaft/img/profil-3.jpg' %}" class="profil-img" alt="">
+                    <h3>...</h3>
+                    <p class="profil-text">.......................</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Teknik Mesin UNSRAT</span></strong>
+        </div>
+        <div class="credits">Programmed by <strong>Andrie Harry</strong>
+        </div>
+    </footer>
+
+
+    <!-- External JS File -->
+    <script src="{% static 'shaft/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'shaft/vendor/aos/aos.js' %}"></script>
+
+   <!-- Main JS File -->
+    <script>
+          AOS.init();
+      </script>
+  </body>
 </html>

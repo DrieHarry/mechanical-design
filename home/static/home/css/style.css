@@ -1,0 +1,138 @@
+/* ======= Umum ======= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ======= Hero Section ======= */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#hero {
+  height: 100vh;
+  background: url('../cover.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.hero-text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+
+.hero-image {
+  max-width: 100%;
+}
+
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logo-container {
+  width: fit-content;
+}
+
+.logo img {
+  max-height: 105px;
+  margin-right: 3px;
+}
+
+
+
+
+/* ======= Features Section ======= */
+.features {
+  padding: 80px 0;
+  background: #f9f9f9;
+  font-family: 'Inter', sans-serif;
+}
+
+.feature-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.feature-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.feature-box i {
+  font-size: 48px;
+  color: #4154f1;
+  margin-bottom: 16px;
+}
+
+/* ======= Tentang Section ======= */
+.tentang {
+  padding: 80px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.profil-item {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.profil-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.profil-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+  padding: 20px 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-top: 1px solid #cddfff;
+}
+
+
+.footer .copyright {
+  text-align: center;
+  color: #012970;
+}
+
+.footer .credits {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: #012970;
+}

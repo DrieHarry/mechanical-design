@@ -16,17 +16,7 @@
 </div>
 <section class="section">
     <div class="row">
-      <!-- ======= Result Card ======= -->
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Diameter Minimum Pada Tiap Titik</h5>
-                {% for result in results %}
-                    <li>{{ result }}</li>
-                {% endfor %}
-          </div>
-        </div>
-      </div>
+      <!-- ======= KOLOM KIRI ======= -->
       <!-- ======= Data Input Card ======= -->
       <div class="col-lg-7">
         <div class="card">
@@ -86,6 +76,72 @@
           </div>
         </div>
       </div>
+      <!-- ======= Result Card ======= -->
+      <div class="col-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Diameter Minimum Pada Tiap Titik</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Titik</th>
+                    <th scope="col">Diameter Minimum</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if results|length == 3 %}
+                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                  {% else %}
+                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                    <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
+                  {% endif %}
+                </tbody>
+              </table>
+                {% for result in results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Diameter Rancangan Card ======= -->
+      <div class="col-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Diameter Rancangan</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Titik</th>
+                    <th scope="col">Diameter Minimum</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if results|length == 3 %}
+                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                  {% else %}
+                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                    <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
+                  {% endif %}
+                </tbody>
+              </table>
+                {% for result in results %}
+                    <li>{{ result }}</li>
+                {% endfor %}
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
 </section>
     
 {% endblock %}
