@@ -17,131 +17,173 @@
 <section class="section">
     <div class="row">
       <!-- ======= KOLOM KIRI ======= -->
-      <!-- ======= Data Input Card ======= -->
       <div class="col-lg-7">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Input Data</h5>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Input</th>
-                    <th scope="col">Nilai</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% if recaps|length == 8 %}
-                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
-                    <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
-                    <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
-                    <tr><td>Gaya Tangensial</td><td>{{ recaps.3 }}</td></tr>
-                    <tr><td>Gaya Radial</td><td>{{ recaps.4 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.5 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.6 }}</td></tr>
-                    <tr><td>Material</td><td>{{ recaps.7 }}</td></tr>
-                  {% elif recaps|length == 7 %}
-                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
-                    <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
-                    <tr><td>Gaya Tangensial</td><td>{{ recaps.2 }}</td></tr>
-                    <tr><td>Gaya Radial</td><td>{{ recaps.3 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.4 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.5 }}</td></tr>
-                    <tr><td>Material</td><td>{{ recaps.6 }}</td></tr>
-                  {% elif recaps|length == 11 %}
-                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
-                    <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
-                    <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
-                    <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
-                    <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.4 }}</td></tr>
-                    <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
-                    <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.6 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.7 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.8 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.9 }}</td></tr>
-                    <tr><td>Material</td><td>{{ recaps.10 }}</td></tr>
-                  {% elif recaps|length == 10 %}
-                    <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
-                    <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
-                    <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.2 }}</td></tr>
-                    <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
-                    <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.4 }}</td></tr>
-                    <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.6 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.7 }}</td></tr>
-                    <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.8 }}</td></tr>
-                    <tr><td>Material</td><td>{{ recaps.9 }}</td></tr>
-                  {% endif %}
-                </tbody>
-              </table>
+        <div class="row">
+          <!-- ======= Data Input Card ======= -->
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Input Data</h5>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Input</th>
+                        <th scope="col">Nilai</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if recaps|length == 8 %}
+                        <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                        <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
+                        <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
+                        <tr><td>Gaya Tangensial</td><td>{{ recaps.3 }}</td></tr>
+                        <tr><td>Gaya Radial</td><td>{{ recaps.4 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.5 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.6 }}</td></tr>
+                        <tr><td>Material</td><td>{{ recaps.7 }}</td></tr>
+                      {% elif recaps|length == 7 %}
+                        <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                        <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
+                        <tr><td>Gaya Tangensial</td><td>{{ recaps.2 }}</td></tr>
+                        <tr><td>Gaya Radial</td><td>{{ recaps.3 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.4 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.5 }}</td></tr>
+                        <tr><td>Material</td><td>{{ recaps.6 }}</td></tr>
+                      {% elif recaps|length == 11 %}
+                        <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                        <tr><td>Daya</td><td>{{ recaps.1 }}</td></tr>
+                        <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
+                        <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
+                        <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.4 }}</td></tr>
+                        <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
+                        <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.6 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.7 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.8 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.9 }}</td></tr>
+                        <tr><td>Material</td><td>{{ recaps.10 }}</td></tr>
+                      {% elif recaps|length == 10 %}
+                        <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
+                        <tr><td>Torsi</td><td>{{ recaps.1 }}</td></tr>
+                        <tr><td>Gaya Tangensial Pada Elemen 1</td><td>{{ recaps.2 }}</td></tr>
+                        <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
+                        <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.4 }}</td></tr>
+                        <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.6 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.7 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.8 }}</td></tr>
+                        <tr><td>Material</td><td>{{ recaps.9 }}</td></tr>
+                      {% endif %}
+                    </tbody>
+                  </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <!-- ======= Result Card ======= -->
-      <div class="col-lg-5">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Diameter Minimum Pada Tiap Titik</h5>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Titik</th>
-                    <th scope="col">Diameter Minimum</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% if results|length == 3 %}
-                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                  {% else %}
-                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                    <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
-                  {% endif %}
-                </tbody>
-              </table>
-                {% for result in results %}
-                    <li>{{ result }}</li>
-                {% endfor %}
-          </div>
-        </div>
-      </div>
+            <!-- ======= Grafik Card ======= -->
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Grafik</h5>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Titik</th>
+                          <th scope="col">Diameter Minimum</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if results|length == 3 %}
+                          <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                          <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                          <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                        {% else %}
+                          <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                          <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                          <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                          <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                      {% for result in results %}
+                          <li>{{ result }}</li>
+                      {% endfor %}
+                </div>
+              </div>
+            </div>
 
-      <!-- ======= Diameter Rancangan Card ======= -->
+        </div>
+      </div> <!-- Akhir Kolom Kiri -->
+
+      <!-- ======= KOLOM KANAN ======= -->
       <div class="col-lg-5">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Diameter Rancangan</h5>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Titik</th>
-                    <th scope="col">Diameter Minimum</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% if results|length == 3 %}
-                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                  {% else %}
-                    <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                    <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                    <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                    <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
-                  {% endif %}
-                </tbody>
-              </table>
-                {% for result in results %}
-                    <li>{{ result }}</li>
-                {% endfor %}
+        <!-- ======= Diameter Minimum ======= -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Diameter Minimum</h5>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Titik</th>
+                      <th scope="col">Diameter Minimum</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if results|length == 3 %}
+                      <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                      <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                      <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                    {% else %}
+                      <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
+                      <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
+                      <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
+                      <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- ======= Diameter Rancangan ======= -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Diameter Rancangan</h5>
+              <form>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Titik</th>
+                      <th scope="col">Diameter Rancangan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if results|length == 3 %}
+                      <tr><td>D1 (Titik A)</td><td><input type="number" class="form-control form-control-sm" id="D1" placeholder="mm"></td></tr>
+                      <tr><td>D2 (Titik B)</td><td><input type="number" class="form-control" id="D2" placeholder="mm"></td></tr>
+                      <tr><td>D3 (Titik C)</td><td><input type="number" class="form-control" id="D3" placeholder="mm"></td></tr>
+                    {% else %}
+                      <tr><td>D1 (Titik A)</td><td><input type="number" class="form-control form-control-sm" id="D1" placeholder="mm"></td></tr>
+                      <tr><td>D2 (Titik B)</td><td><input type="number" class="form-control form-control-sm" id="D2" placeholder="mm"></td></tr>
+                      <tr><td>D3 (Titik C)</td><td><input type="number" class="form-control form-control-sm" id="D3" placeholder="mm"></td></tr>
+                      <tr><td>D4 (Titik D)</td><td><input type="number" class="form-control form-control-sm" id="D4" placeholder="mm"></td></tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+      </div> <!-- Akhir Kolom Kanan -->
       
-      
-    </div>
+    </div> 
+
 </section>
     
 {% endblock %}
