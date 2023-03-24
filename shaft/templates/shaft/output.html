@@ -38,8 +38,8 @@
                         <tr><td>Kecepatan Putar</td><td>{{ recaps.2 }}</td></tr>
                         <tr><td>Gaya Tangensial</td><td>{{ recaps.3 }}</td></tr>
                         <tr><td>Gaya Radial</td><td>{{ recaps.4 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.5 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.6 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td><div id="AB">{{ recaps.5 }}</div></td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td><div id="BC">{{ recaps.6 }}</div></td></tr>
                         <tr><td>Material</td><td>{{ recaps.7 }}</td></tr>
                       {% elif recaps|length == 7 %}
                         <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
@@ -68,9 +68,9 @@
                         <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.3 }}</td></tr>
                         <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.4 }}</td></tr>
                         <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.6 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.7 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.8 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td><div id="AB">{{ recaps.6 }}</div></td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td><div id="BC">{{ recaps.7 }}</div></td></tr>
+                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td><div id="CD">{{ recaps.8 }}</div></td></tr>
                         <tr><td>Material</td><td>{{ recaps.9 }}</td></tr>
                       {% endif %}
                     </tbody>
@@ -78,15 +78,6 @@
               </div>
             </div>
           </div>
-            <!-- ======= Generated Images Card ======= -->
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Generated Images</h5>
-                    <img id="generated_shaft_image" src="" alt="Generated shaft image" width="120%" height="auto" class="mx-auto d-block"/>
-                </div>
-              </div>
-            </div>
 
         </div>
       </div> <!-- Akhir Kolom Kiri -->
@@ -150,7 +141,7 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary" onclick="GenerateImage()">Generate Images</button>
+                  <button type="button" class="btn btn-primary" onclick="GenerateImage()">Buat Gambar</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form>
@@ -169,7 +160,11 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Gambar</h5>
-              <img id="generated_shaft_image" src="" alt="Generated shaft image" width="120%" height="auto" class="mx-auto d-block"/>
+              <img id="generated_shaft_image" src="" alt="Generated shaft image" width="90%" height="auto" class="mx-auto d-block"/>
+              <div class="text-center">
+                <button type="button" class="btn btn-outline-danger"><i class="bi bi-filetype-pdf"> </i> Download as .PDF</button>
+                <button type="reset" class="btn btn-outline-success"><i class="bi bi-images"> </i> Download as .PNG</button>
+              </div>
           </div>
         </div>
       </div>
@@ -188,10 +183,11 @@
       const D4 = document.getElementById("D4") ? document.getElementById("D4").value : null;
       const AB = parseFloat(document.getElementById("AB").textContent);
       const BC = parseFloat(document.getElementById("BC").textContent);
-      const CD = parseFloat(document.getElementById("CD").textContent);
+      const CD = document.getElementById("CD") && document.getElementById("CD").textContent ? parseFloat(document.getElementById("CD").textContent) : null;
   
-      let url = `/shaft/generate_shaft_image?D1=${D1}&D2=${D2}&D3=${D3}&AB=${AB}&BC=${BC}&CD=${CD}`;
+      let url = `/shaft/generate_shaft_image?D1=${D1}&D2=${D2}&D3=${D3}&AB=${AB}&BC=${BC}`;
       if (D4) {
+          url += `&CD=${CD}`;
           url += `&D4=${D4}`;
       }
   

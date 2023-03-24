@@ -1,67 +1,9 @@
-from django.shortcuts import render
-
-
-from .forms import *
-from .models import *
-from .perhitungan import tipe1, tipe2, get_recap
-
-
 import io
 from django.http import FileResponse
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot as plt
- 
 
-# VIEWS FUNCTION
-def input(request):
-    return render(request, "shaft/input.html", {
-        "form": MyForm(),
-    })
-
-def output(request):
-    form = MyForm(request.POST)
-    if not form.is_valid():
-        return render(request, "shaft/input.html", {
-            "form": form,
-        })
-    
-    # Pilihan tipe 1 atau tipe 2
-    RadioTipe = request.POST['RadioSelectTipe']
-
-    if RadioTipe == "1":
-        results = tipe1(request)
-        recaps = get_recap(request)
-
-        return render(request, "shaft/output.html", {
-            "results": results,
-            "recaps": recaps,
-        })
-
-    if RadioTipe == "2":
-        results = tipe2(request)
-        recaps = get_recap(request)
-
-        return render(request, "shaft/output.html", {
-            "results": results,
-            "recaps": recaps,
-        })
-
-
-def about(request):
-    return render(request, "shaft/about.html")
-
-
-def generate_shaft_image(request):
-    # Ambil Input
-    d1 = float(request.GET.get("D1"))
-    d2 = float(request.GET.get("D2"))
-    d3 = float(request.GET.get("D3"))
-    d4 = float(request.GET.get("D4")) if request.GET.get("D4") else None
-    AB = float(request.GET.get("AB"))
-    BC = float(request.GET.get("BC"))
-    CD = float(request.GET.get("CD")) if request.GET.get("CD") else None
-    rectangle_length = 18 + (d2/5)
-
+def gambar_2d(d1, d2, d3, AB, BC, CD, d4=None, rectangle_length=18+8):
     # Create the figure and draw the shaft
     screen_width = 15  # Set your screen width in inches
     screen_height = 7  # Set your screen height in inches
@@ -109,7 +51,7 @@ def generate_shaft_image(request):
     # Add annotations with arrows for diameters and lengths
     # Diameter annotations
     def annotate_diameter(x, d, label_offset=-12, arrow_offset=9, arrow_radius=7):
-        ax.annotate(f'⌀ {d}', (x - label_offset, d / 2 + arrow_offset), fontsize=12, ha='center', va='center')
+        ax.annotate(f'⌀ {d}', (x - label_offset, d / 2 + arrow_offset), fontsize=11, ha='center', va='center')
         ax.annotate('', (x, d / 2), (x + arrow_radius, d / 2 + arrow_radius), arrowprops=dict(arrowstyle='->'))
 
     # Annotate diameters for sections
@@ -124,19 +66,19 @@ def generate_shaft_image(request):
     # Length
     # AB
     ax.annotate('', (0, -d2/2 - 20), (AB, -d2/2 - 20), arrowprops=dict(arrowstyle='<->'))
-    ax.annotate(f'{AB}', (AB/2, -d2/2 - 23), fontsize=12, ha='center', va='center')
+    ax.annotate(f'{AB}', (AB/2, -d2/2 - 23), fontsize=10, ha='center', va='center')
     ax.plot([0, 0], [-d1/2 - 5, -d2/2 - 20], 'k:', linewidth=0.6)
 
     # BC
     ax.annotate('', (AB, -d2/2 - 20), (AB + BC, -d2/2 - 20), arrowprops=dict(arrowstyle='<->'))
-    ax.annotate(f'{BC}', (AB + BC/2, -d2/2 - 23), fontsize=12, ha='center', va='center')
+    ax.annotate(f'{BC}', (AB + BC/2, -d2/2 - 23), fontsize=10, ha='center', va='center')
     ax.plot([AB, AB], [-d2/2 - 5, -d2/2 - 20], 'k:', linewidth=0.6)
-    ax.plot([AB + BC, AB + BC], [-d2/2 - 5, -d2/2 - 20], 'k:', linewidth=0.6)
+    ax.plot([AB + BC, AB + BC], [-d2/2 - 10, -d2/2 - 20], 'k:', linewidth=0.6)
 
     # CD
     if d4:
         ax.annotate('', (AB + BC, -d2/2 - 20), (AB + BC + CD, -d2/2 - 20), arrowprops=dict(arrowstyle='<->'))
-        ax.annotate(f'{CD}', (AB + BC + CD/2, -d2/2 - 23), fontsize=12, ha='center', va='center')
+        ax.annotate(f'{CD}', (AB + BC + CD/2, -d2/2 - 23), fontsize=10, ha='center', va='center')
         ax.plot([AB + BC + CD, AB + BC + CD], [-d3/2 - 5, -d2/2 - 20], 'k:', linewidth=0.6)
 
 
@@ -151,11 +93,7 @@ def generate_shaft_image(request):
     ax.set_yticks([])
     ax.axis('off')
 
-    # Save the figure to a temporary buffer and return it as a file response
-    buf = io.BytesIO()
-    canvas = FigureCanvasAgg(fig)
-    canvas.print_png(buf)
-    buf.seek(0)
-    response = FileResponse(buf, content_type='image/png')
-    response['Content-Disposition'] = 'inline; filename="shaft.png"'
-    return response
+    plt.show()
+
+    # Return the image created
+    return fig
