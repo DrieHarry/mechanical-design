@@ -57,9 +57,9 @@
                         <tr><td>Gaya Radial Pada Elemen 1</td><td>{{ recaps.4 }}</td></tr>
                         <tr><td>Gaya Tangensial Pada Elemen 2</td><td>{{ recaps.5 }}</td></tr>
                         <tr><td>Gaya Radial Pada Elemen 2</td><td>{{ recaps.6 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td>{{ recaps.7 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td>{{ recaps.8 }}</td></tr>
-                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td>{{ recaps.9 }}</td></tr>
+                        <tr><td>Jarak Antara Elemen A ke Elemen B</td><td><div id="AB">{{ recaps.7 }}</div></td></tr>
+                        <tr><td>Jarak Antara Elemen B ke Elemen C</td><td><div id="BC">{{ recaps.8 }}</div></td></tr>
+                        <tr><td>Jarak Antara Elemen C ke Elemen D</td><td><div id="CD">{{ recaps.9 }}</div></td></tr>
                         <tr><td>Material</td><td>{{ recaps.10 }}</td></tr>
                       {% elif recaps|length == 10 %}
                         <tr><td>Faktor Keamanan</td><td>{{ recaps.0 }}</td></tr>
@@ -78,34 +78,12 @@
               </div>
             </div>
           </div>
-            <!-- ======= Grafik Card ======= -->
+            <!-- ======= Generated Images Card ======= -->
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Grafik</h5>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">Titik</th>
-                          <th scope="col">Diameter Minimum</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% if results|length == 3 %}
-                          <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                          <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                          <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                        {% else %}
-                          <tr><td>D1 (Titik A)</td><td>{{ results.0 }}</td></tr>
-                          <tr><td>D2 (Titik B)</td><td>{{ results.1 }}</td></tr>
-                          <tr><td>D3 (Titik C)</td><td>{{ results.2 }}</td></tr>
-                          <tr><td>D4 (Titik D)</td><td>{{ results.3 }}</td></tr>
-                        {% endif %}
-                      </tbody>
-                    </table>
-                      {% for result in results %}
-                          <li>{{ result }}</li>
-                      {% endfor %}
+                  <h5 class="card-title">Generated Images</h5>
+                    <img id="generated_shaft_image" src="" alt="Generated shaft image" width="120%" height="auto" class="mx-auto d-block"/>
                 </div>
               </div>
             </div>
@@ -150,6 +128,7 @@
             <div class="card-body">
               <h5 class="card-title">Diameter Rancangan</h5>
               <form>
+                {% csrf_token %}
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -160,8 +139,8 @@
                   <tbody>
                     {% if results|length == 3 %}
                       <tr><td>D1 (Titik A)</td><td><input type="number" class="form-control form-control-sm" id="D1" placeholder="mm"></td></tr>
-                      <tr><td>D2 (Titik B)</td><td><input type="number" class="form-control" id="D2" placeholder="mm"></td></tr>
-                      <tr><td>D3 (Titik C)</td><td><input type="number" class="form-control" id="D3" placeholder="mm"></td></tr>
+                      <tr><td>D2 (Titik B)</td><td><input type="number" class="form-control form-control-sm" id="D2" placeholder="mm"></td></tr>
+                      <tr><td>D3 (Titik C)</td><td><input type="number" class="form-control form-control-sm" id="D3" placeholder="mm"></td></tr>
                     {% else %}
                       <tr><td>D1 (Titik A)</td><td><input type="number" class="form-control form-control-sm" id="D1" placeholder="mm"></td></tr>
                       <tr><td>D2 (Titik B)</td><td><input type="number" class="form-control form-control-sm" id="D2" placeholder="mm"></td></tr>
@@ -171,7 +150,7 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-primary" onclick="GenerateImage()">Generate Images</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form>
@@ -182,8 +161,47 @@
 
       </div> <!-- Akhir Kolom Kanan -->
       
-    </div> 
+    </div>  <!-- Akhir Kiri/Kanan -->
+
+    <!-- ======= Gambar Card ======= -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Gambar</h5>
+              <img id="generated_shaft_image" src="" alt="Generated shaft image" width="120%" height="auto" class="mx-auto d-block"/>
+          </div>
+        </div>
+      </div>
+    </div>
 
 </section>
     
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function GenerateImage() {
+      const D1 = document.getElementById("D1").value;
+      const D2 = document.getElementById("D2").value;
+      const D3 = document.getElementById("D3").value;
+      const D4 = document.getElementById("D4") ? document.getElementById("D4").value : null;
+      const AB = parseFloat(document.getElementById("AB").textContent);
+      const BC = parseFloat(document.getElementById("BC").textContent);
+      const CD = parseFloat(document.getElementById("CD").textContent);
+  
+      let url = `/shaft/generate_shaft_image?D1=${D1}&D2=${D2}&D3=${D3}&AB=${AB}&BC=${BC}&CD=${CD}`;
+      if (D4) {
+          url += `&D4=${D4}`;
+      }
+  
+      fetch(url)
+          .then(response => response.blob())
+          .then(imageBlob => {
+              const image = document.getElementById("generated_shaft_image");
+              const imageURL = URL.createObjectURL(imageBlob);
+              image.src = imageURL;
+          });
+  }
+  </script>
 {% endblock %}
