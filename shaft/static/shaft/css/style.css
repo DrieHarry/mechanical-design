@@ -134,6 +134,20 @@ HEADER
   }
 }
 
+.date {
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  color: #899bbd;
+  font-weight: 600;
+}
+
+.datelogo {
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  color: #899bbd;
+  font-weight: 600;
+}
+
 .breadcrumb {
   font-size: 14px;
   font-family: "Nunito", sans-serif;

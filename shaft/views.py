@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .forms import *
 from .models import *
 from .perhitungan import tipe1, tipe2, get_recap
+from .date import get_date
 
 
 import io
@@ -12,10 +13,12 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot as plt
  
 
+date = get_date()
 # VIEWS FUNCTION
 def input(request):
     return render(request, "shaft/input.html", {
         "form": MyForm(),
+        "date": date,
     })
 
 def output(request):
@@ -23,6 +26,7 @@ def output(request):
     if not form.is_valid():
         return render(request, "shaft/input.html", {
             "form": form,
+            "date": date,
         })
     
     # Pilihan tipe 1 atau tipe 2
@@ -35,6 +39,7 @@ def output(request):
         return render(request, "shaft/output.html", {
             "results": results,
             "recaps": recaps,
+            "date": date,
         })
 
     if RadioTipe == "2":
@@ -44,11 +49,14 @@ def output(request):
         return render(request, "shaft/output.html", {
             "results": results,
             "recaps": recaps,
+            "date": date,
         })
 
 
 def about(request):
-    return render(request, "shaft/about.html")
+    return render(request, "shaft/about.html", {
+        "date": date,
+    })
 
 
 def generate_shaft_image(request):

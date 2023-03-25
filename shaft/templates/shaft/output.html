@@ -1,4 +1,5 @@
 {% extends "shaft/layout.html" %}
+{% load static %}
 
         {% block title %}Output{% endblock %}
 
@@ -162,8 +163,8 @@
             <h5 class="card-title">Gambar</h5>
               <img id="generated_shaft_image" src="" alt="Generated shaft image" width="90%" height="auto" class="mx-auto d-block"/>
               <div class="text-center">
-                <button type="button" class="btn btn-outline-danger"><i class="bi bi-filetype-pdf"> </i> Download as .PDF</button>
-                <button type="reset" class="btn btn-outline-success"><i class="bi bi-images"> </i> Download as .PNG</button>
+                <button type="button" class="btn btn-outline-danger" onclick="convertImageToPDF()"><i class="bi bi-filetype-pdf"> </i> Download as .PDF</button>
+                <button type="button" class="btn btn-outline-success" onclick="downloadPNG()"><i class="bi bi-images"> </i> Download as .PNG</button>
               </div>
           </div>
         </div>
@@ -175,7 +176,9 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{% static 'shaft/vendor/jspdf/jspdf.umd.min.js' %}"></script>
 <script>
+  // Fungsi untuk buat gambar
   function GenerateImage() {
       const D1 = document.getElementById("D1").value;
       const D2 = document.getElementById("D2").value;
@@ -199,5 +202,72 @@
               image.src = imageURL;
           });
   }
+  
+  // Fungsi untuk konversi gambar ke pdf
+  function convertImageToPDF() {
+      const jsPDF = window.jspdf.jsPDF;
+      const image = document.getElementById("generated_shaft_image");
+      const imgSrc = image.src;
+      
+      // Check if an image is loaded
+      if (imgSrc === "http://127.0.0.1:8000/shaft/output") {
+        alert("Buat Gambar terlebih dahulu sebelum download.");
+        return;
+      }
+
+      // Create a new jsPDF instance
+      const pdf = new jsPDF("landscape", "mm", "legal");
+
+      // Calculate the dimensions for the image to be centered and auto-fit
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgRatio = image.naturalWidth / image.naturalHeight;
+      const pageRatio = pageWidth / pageHeight;
+
+      let imgWidth, imgHeight;
+
+      if (imgRatio >= pageRatio) {
+        imgWidth = pageWidth * 0.8;
+        imgHeight = (imgWidth / imgRatio);
+      } else {
+        imgHeight = pageHeight * 0.8;
+        imgWidth = (imgHeight * imgRatio);
+      }
+
+      // Calculate the position for the image to be centered
+      const imgPosX = (pageWidth - imgWidth) / 2;
+      const imgPosY = (pageHeight - imgHeight) / 2;
+
+      // Add the image to the PDF
+      pdf.addImage(imgSrc, "PNG", imgPosX, imgPosY, imgWidth, imgHeight);
+
+      // Save the PDF
+      pdf.save("shaft_design.pdf");
+  }
+
+  // Fungsi untuk download gambar
+
+  function downloadPNG() {
+    const image = document.getElementById("generated_shaft_image");
+    const imageURL = image.src;
+    
+    // Check if an image is loaded
+    if (imageURL === "http://127.0.0.1:8000/shaft/output") {
+      alert("Buat Gambar terlebih dahulu sebelum download.");
+      return;
+    }
+    // Create a temporary download link
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = "shaft_design.png";
+    document.body.appendChild(link);
+
+    // Simulate click event to download the image
+    link.click();
+
+    // Remove the temporary link from the DOM
+    document.body.removeChild(link);
+  }
   </script>
+
 {% endblock %}
