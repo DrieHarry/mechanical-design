@@ -45,6 +45,7 @@ class MyForm(forms.Form):
         T = cleaned_data.get("T")
         AB = cleaned_data.get("AB")
         BC = cleaned_data.get("BC")
+        Material = cleaned_data.get("Material")
         errors = []
         if not tipe:
             errors.append('Pilih Tipe!')
@@ -58,6 +59,8 @@ class MyForm(forms.Form):
         elif RadioSelectDayaTorsi == 'T':
             if not T:
                 errors.append('Torsi harus diisi!')
+        if not Material:
+            errors.append('Pilih Material!')
         if tipe == '1':
             Ft = cleaned_data.get("Ft")
             Fr = cleaned_data.get("Fr")

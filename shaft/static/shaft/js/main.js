@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Animasi Menu Sidebar Script
     const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
     const sidebar = document.getElementById('sidebar');
     const body = document.getElementById('body');
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   
-    // Active Link
+    // Highlight menu aktif Script
     const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
     navLinks.forEach((navLink) => {
       navLink.addEventListener('click', () => {
@@ -23,53 +24,95 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   
-    // Your other custom JavaScript code
-    var radios = document.getElementsByName('RadioSelectTipe');
-    var tipe1 = document.querySelectorAll('.tipe1');
-    var tipe2 = document.querySelectorAll('.tipe2');
-
-    for (var i = 0; i < radios.length; i++) {
-        radios[i].onchange = function () {
-            if (this.value == '1') {
-                for (var j = 0; j < tipe1.length; j++) {
-                    tipe1[j].style.display = "block";
+    // Pilihan Radio Script
+    let radios = document.getElementsByName('RadioSelectTipe');
+    let tipe1 = document.querySelectorAll('.tipe1');
+    let tipe2 = document.querySelectorAll('.tipe2');
+    let notipe = document.querySelectorAll('.notipe');
+    let radios2 = document.getElementsByName('RadioSelectDayaTorsi');
+    let daya = document.querySelectorAll('.daya');
+    let torsi = document.querySelectorAll('.torsi');
+    // Fungsi Tipe untuk menampilkan dan menyembunyikan konten
+    function updateContent() {
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                if (radios[i].value == '1') {
+                    for (let j = 0; j < tipe1.length; j++) {
+                        tipe1[j].style.display = "block";
+                    }
+                    for (let k = 0; k < tipe2.length; k++) {
+                        tipe2[k].style.display = "none";
+                    }
+                    for (let l = 0; l < notipe.length; l++) {
+                        notipe[l].style.display = "block";
+                    }
+                } else if (radios[i].value == '2') {
+                    for (let j = 0; j < tipe1.length; j++) {
+                        tipe1[j].style.display = "none";
+                    }
+                    for (let k = 0; k < tipe2.length; k++) {
+                        tipe2[k].style.display = "block";
+                    }
+                    for (let l = 0; l < notipe.length; l++) {
+                        notipe[l].style.display = "block";
+                    }
                 }
-                for (var k = 0; k < tipe2.length; k++) {
-                    tipe2[k].style.display = "none";
-                }
-            } else if (this.value == '2') {
-                for (var j = 0; j < tipe1.length; j++) {
-                    tipe1[j].style.display = "none";
-                }
-                for (var k = 0; k < tipe2.length; k++) {
-                    tipe2[k].style.display = "block";
+            }
+        }
+    }
+    // Fungsi Daya Torsi untuk menampilkan dan menyembunyikan konten
+    function updateContent2() {
+        for (let i = 0; i < radios2.length; i++) {
+            if (radios2[i].checked) {
+                if (radios2[i].value == 'D') {
+                    for (let j = 0; j < daya.length; j++) {
+                        daya[j].style.display = "block";
+                    }
+                    for (let k = 0; k < torsi.length; k++) {
+                        torsi[k].style.display = "none";
+                    }
+                } else if (radios2[i].value == 'T') {
+                    for (let j = 0; j < daya.length; j++) {
+                        daya[j].style.display = "none";
+                    }
+                    for (let k = 0; k < torsi.length; k++) {
+                        torsi[k].style.display = "block";
+                    }
                 }
             }
         }
     }
 
-    var radios2 = document.getElementsByName('RadioSelectDayaTorsi');
-    var daya = document.querySelectorAll('.daya');
-    var torsi = document.querySelectorAll('.torsi');
-
-    for(var i = 0; i < radios.length; i++) {
-        radios2[i].onchange = function() {
-            if (this.value == 'D') {
-                for (var j = 0; j < daya.length; j++) {
-                    daya[j].style.display = "block";
-                }
-                for (var k = 0; k < torsi.length; k++) {
-                    torsi[k].style.display = "none";
-                }
-            } else if (this.value == 'T') {
-                for (var j = 0; j < daya.length; j++) {
-                    daya[j].style.display = "none";
-                }
-                for (var k = 0; k < torsi.length; k++) {
-                    torsi[k].style.display = "block";
-                }
-            }
-        }
+    for (let j = 0; j < tipe1.length; j++) {
+        tipe1[j].style.display = "none";
+    }
+    for (let k = 0; k < tipe2.length; k++) {
+        tipe2[k].style.display = "none";
+    }
+    for (let l = 0; l < notipe.length; l++) {
+        notipe[l].style.display = "none";
+    }
+    for (let j = 0; j < torsi.length; j++) {
+        torsi[j].style.display = "none";
+    }
+    for (let k = 0; k < daya.length; k++) {
+        daya[k].style.display = "none";
     }
 
+    for (let i = 0; i < radios.length; i++) {
+        radios[i].onchange = updateContent;
+    }
+    for (let i = 0; i < radios2.length; i++) {
+        radios2[i].onchange = updateContent2;
+    }
+
+    // Panggil Fungsi saat halaman di load
+    window.onload = function() {
+        updateContent();
+        updateContent2();
+    };
+    
+
+
+    // Script Lainnya disini
   });
