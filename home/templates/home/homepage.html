@@ -18,9 +18,30 @@
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
   </head>
   <body>
-    <!-- ======= Hero Section ======= -->
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex justify-content-between align-items-center">
+
+        <div id="logo">
+            <a href="{% url 'home:home' %}"><img src="{% static 'home/logo2.png' %}" alt=""></a>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'shaft:input' %}">Mulai</a></li>
+            <li><a class="nav-link scrollto" href="#features">Fitur</a></li>
+            <li><a class="nav-link scrollto" href="#tentang">Tentang</a></li>
+            <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero ======= -->
     <section id="hero" class="d-flex align-items-center" data-aos="fade">
-        <div class="container pt-5 my-5 text-center border-bottom">
+        <div class="container pt-5 text-center border-bottom">
             <div class="logo-container mx-auto mb-3" data-aos="fade-up" data-aos-duration="1500">
                 <a href="{% url 'home:home' %}" class="logo d-flex align-items-center">
                   <img src="{% static 'home/logo.png' %}" alt="">
@@ -28,20 +49,18 @@
                 </a>
             </div>
             <div class="col-lg-6 mx-auto" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500">
-                <p class="hero-text lead mb-4">Solusi Desain Poros Mekanis. Aplikasi untuk menghasilkan desain poros mekanis berdasarkan input pengguna dan prinsip-prinsip dari buku Machine Elements in Mechanical Design oleh Robert L. Mott.</p>
+                <p class="hero-text lead mb-4">Solusi Desain Poros Mekanis yang Cepat dan Mudah</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                    <a href="{% url 'shaft:input' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Mulai Desain</a>
-                    <a href="{% url 'shaft:about' %}" class="btn btn-secondary btn-lg px-4">Pelajari lebih lanjut</a>
+                    <a href="{% url 'shaft:input' %}" class="btn-get-started px-4 me-sm-3">Mulai Desain</a>
+                    <a href="{% url 'shaft:about' %}" class="btn-get-started px-4">Pelajari lebih lanjut</a>
                 </div>
             </div>
-            <div class="overflow-hidden" style="max-height: 30vh;">
-                <div class="container px-5" data-aos="fade-left" data-aos-duration="1500">
-                    <img src="{% static 'home/hero-image.png' %}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
-                </div>
+            <div class="overflow-hidden" style="max-height: 30vh;" data-aos="fade-left" data-aos-duration="1500">
+                <img src="{% static 'home/hero-image.png' %}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
             </div>
         </div>
     </section>
-    <!-- ======= Fitur Section ======= -->
+    <!-- ======= Fitur  ======= -->
     <section id="features" class="features">
         <div class="container">
             <div class="row">
@@ -69,28 +88,28 @@
             </div>
         </div>
     </section>
-    <!-- ======= Tentang Section ======= -->
-    <section class="tentang">
+    <!-- ======= Tentang ======= -->
+    <section id="tentang" class="tentang" data-aos="fade-up">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>About Us</h2>
+            <div class="section-title">
+                <h2>Tentang</h2>
             </div>
         <div class="row">
-            <div class="col-lg-4" data-aos="fade-up">
+            <div class="col-lg-4">
                 <div class="profil-item">
                     <img src="{% static 'shaft/img/profil-1.jpg' %}" class="profil-img" alt="">
                     <h3>Nama</h3>
                     <p class="profil-text">deskripsi</p>
                 </div>
             </div>
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-4">
                 <div class="profil-item">
                     <img src="{% static 'shaft/img/profil-2.jpg' %}" class="profil-img" alt="">
                     <h3>Nama</h3>
                     <p class="profil-text">deskripsi</p>
                 </div>
             </div>
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-4">
                 <div class="profil-item">
                     <img src="{% static 'shaft/img/profil-3.jpg' %}" class="profil-img" alt="">
                     <h3>Nama</h3>
@@ -100,6 +119,65 @@
         </div>
         </div>
     </section>
+
+    <!-- ======= Kontak ======= -->
+    <section id="contact">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Kontak Kami</h2>
+            </div>
+            <div class="row">
+    
+            <div class="col-lg-4 col-md-4">
+                <div class="contact-about">
+                        <div class="logo-kontak d-flex align-items-center">
+                          <img src="{% static 'home/logo.png' %}" alt="">
+                          <span class="display-6 fw-bold">Solver-Shaft</span>
+                    </div>
+                <div class="info">
+                    <i class="bi bi-envelope"></i>
+                    <p>msolvershaft@gmail.com</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-8">
+                <div class="form">
+                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                    <div class="form-group col-lg-6">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                    </div>
+                    <div class="form-group col-lg-6 mt-3 mt-lg-0">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                    </div>
+                    </div>
+                    <div class="form-group mt-3">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                    </div>
+                    <div class="form-group mt-3">
+                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="my-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Telah Terkirim. Terimakasih!</div>
+                    </div>
+                    <div class="text-center"><button type="submit" title="Send Message">Kirim</button></div>
+                </form>
+                </div>
+            </div>
+    
+            </div>
+    
+        </div>
+        </section><!-- End Contact Section -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
@@ -116,8 +194,9 @@
     <script src="{% static 'shaft/vendor/aos/aos.js' %}"></script>
 
    <!-- Main JS File -->
+    <script src="{% static 'home/js/main.js' %}"></script>
     <script>
           AOS.init();
-      </script>
+    </script>
   </body>
 </html>
