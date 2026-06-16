@@ -13,12 +13,11 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot as plt
  
 
-date = get_date()
 # VIEWS FUNCTION
 def input(request):
     return render(request, "shaft/input.html", {
         "form": MyForm(),
-        "date": date,
+        "date": get_date(),
     })
 
 def output(request):
@@ -26,36 +25,36 @@ def output(request):
     if not form.is_valid():
         return render(request, "shaft/input.html", {
             "form": form,
-            "date": date,
+            "date": get_date(),
         })
     
     # Pilihan tipe 1 atau tipe 2
-    RadioTipe = request.POST['RadioSelectTipe']
+    RadioTipe = form.cleaned_data['RadioSelectTipe']
 
     if RadioTipe == "1":
-        results = tipe1(request)
-        recaps = get_recap(request)
+        results = tipe1(form.cleaned_data)
+        recaps = get_recap(form.cleaned_data)
 
         return render(request, "shaft/output.html", {
             "results": results,
             "recaps": recaps,
-            "date": date,
+            "date": get_date(),
         })
 
     if RadioTipe == "2":
-        results = tipe2(request)
-        recaps = get_recap(request)
+        results = tipe2(form.cleaned_data)
+        recaps = get_recap(form.cleaned_data)
 
         return render(request, "shaft/output.html", {
             "results": results,
             "recaps": recaps,
-            "date": date,
+            "date": get_date(),
         })
 
 
 def about(request):
     return render(request, "shaft/about.html", {
-        "date": date,
+        "date": get_date(),
     })
 
 

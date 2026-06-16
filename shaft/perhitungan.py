@@ -5,30 +5,29 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-def get_post(request):
-    N = float(request.POST['N']) #Faktor Keamanan
-    AB = float(request.POST['AB']) #Jarak Antara Bantalan A ke Elemen B
-    BC = float(request.POST['BC']) #Jarak Antara Bantalan C ke Elemen B
-    RadioDayaTorsi = request.POST['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
+def get_post(data):
+    N = data['N'] #Faktor Keamanan
+    AB = data['AB'] #Jarak Antara Bantalan A ke Elemen B
+    BC = data['BC'] #Jarak Antara Bantalan C ke Elemen B
+    RadioDayaTorsi = data['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
 
     # Bahan
-    id = request.POST['Material']
-    material = Materials.objects.get(id=id)
+    material = data['Material']
     Su = material.tegangan_tarik
     Sy = material.tegangan_luluh
     
-    RadioTipe = request.POST['RadioSelectTipe']
+    RadioTipe = data['RadioSelectTipe']
     if RadioTipe == "1":
-        Ft = float(request.POST['Ft']) #Gaya Tangensial Pada Elemen
-        Fr = float(request.POST['Fr']) #Gaya Radial Pada Elemen
+        Ft = data['Ft'] #Gaya Tangensial Pada Elemen
+        Fr = data['Fr'] #Gaya Radial Pada Elemen
         return N, Ft, Fr, AB, BC, RadioDayaTorsi, Su, Sy
     
     if RadioTipe == "2":
-        Ft1 = float(request.POST['Ft1']) #Gaya Tangensial Pada Elemen
-        Fr1 = float(request.POST['Fr1']) #Gaya Radial Pada Elemen
-        Ft2 = float(request.POST['Ft2']) #Gaya Tangensial Pada Elemen
-        Fr2 = float(request.POST['Fr2']) #Gaya Radial Pada Elemen
-        CD = float(request.POST['CD']) #Jarak Antara Bantalan C ke Elemen B
+        Ft1 = data['Ft1'] #Gaya Tangensial Pada Elemen
+        Fr1 = data['Fr1'] #Gaya Radial Pada Elemen
+        Ft2 = data['Ft2'] #Gaya Tangensial Pada Elemen
+        Fr2 = data['Fr2'] #Gaya Radial Pada Elemen
+        CD = data['CD'] #Jarak Antara Bantalan C ke Elemen B
         return N, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, RadioDayaTorsi, Su, Sy
 
 
@@ -63,17 +62,17 @@ def kekuatan_lelah_aktual(Su):
     Sn = S * 0.75 * 0.81
     return Sn
 
-def tipe1(request):
+def tipe1(data):
     # Akses Input
-    N, Ft, Fr, AB, BC, RadioDayaTorsi, Su, Sy = get_post(request)
+    N, Ft, Fr, AB, BC, RadioDayaTorsi, Su, Sy = get_post(data)
 
     # Menghitung Torsi
     if RadioDayaTorsi == "D":
-        P = float(request.POST['P']) #Daya
-        n = float(request.POST['n']) #Kecepatan Putar
+        P = data['P'] #Daya
+        n = data['n'] #Kecepatan Putar
         T = (P * 1000 / (math.pi * n / 30) ) * 1000
     if RadioDayaTorsi == "T":
-        Torsi = float(request.POST['T'])
+        Torsi = data['T']
         T = Torsi
     
     # Menghitung Gaya Reaksi Tumpuan
@@ -104,16 +103,16 @@ def tipe1(request):
 
     return result_a, result_b, result_c
 
-def tipe2(request):
-    N, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, RadioDayaTorsi, Su, Sy = get_post(request)
+def tipe2(data):
+    N, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, RadioDayaTorsi, Su, Sy = get_post(data)
     
     # Menghitung Torsi
     if RadioDayaTorsi == "D":
-        P = float(request.POST['P']) #Daya
-        n = float(request.POST['n']) #Kecepatan Putar
+        P = data['P'] #Daya
+        n = data['n'] #Kecepatan Putar
         T = (P * 1000 / (math.pi * n / 30) ) * 1000
     if RadioDayaTorsi == "T":
-        Torsi = float(request.POST['T'])
+        Torsi = data['T']
         T = Torsi
 
     # Menghitung Gaya Reaksi Tumpuan
@@ -160,40 +159,39 @@ def tipe2(request):
     return result_a, result_b, result_c, result_d
 
 
-def get_recap(request):
-    N = float(request.POST['N']) #Faktor Keamanan
-    AB = float(request.POST['AB']) #Jarak Antara Bantalan A ke Elemen B
-    BC = float(request.POST['BC']) #Jarak Antara Bantalan C ke Elemen B
-    RadioDayaTorsi = request.POST['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
+def get_recap(data):
+    N = data['N'] #Faktor Keamanan
+    AB = data['AB'] #Jarak Antara Bantalan A ke Elemen B
+    BC = data['BC'] #Jarak Antara Bantalan C ke Elemen B
+    RadioDayaTorsi = data['RadioSelectDayaTorsi'] # Pilihan memakai daya atau torsi
 
     # Bahan
-    id = request.POST['Material']
-    material = Materials.objects.get(id=id)
+    material = data['Material']
     Su = material.tegangan_tarik
     Sy = material.tegangan_luluh
     
-    RadioTipe = request.POST['RadioSelectTipe']
+    RadioTipe = data['RadioSelectTipe']
     if RadioTipe == "1":
-        Ft = float(request.POST['Ft']) #Gaya Tangensial Pada Elemen
-        Fr = float(request.POST['Fr']) #Gaya Radial Pada Elemen
+        Ft = data['Ft'] #Gaya Tangensial Pada Elemen
+        Fr = data['Fr'] #Gaya Radial Pada Elemen
         if RadioDayaTorsi == "D":
-            P = float(request.POST['P']) #Daya
-            n = float(request.POST['n']) #Kecepatan Putar
+            P = data['P'] #Daya
+            n = data['n'] #Kecepatan Putar
             return N, P, n, Ft, Fr, AB, BC, material
         if RadioDayaTorsi == "T":
-            Torsi = float(request.POST['T'])
+            Torsi = data['T']
             return N, Torsi, Ft, Fr, AB, BC, material
     
     if RadioTipe == "2":
-        Ft1 = float(request.POST['Ft1']) #Gaya Tangensial Pada Elemen
-        Fr1 = float(request.POST['Fr1']) #Gaya Radial Pada Elemen
-        Ft2 = float(request.POST['Ft2']) #Gaya Tangensial Pada Elemen
-        Fr2 = float(request.POST['Fr2']) #Gaya Radial Pada Elemen
-        CD = float(request.POST['CD']) #Jarak Antara Bantalan C ke Elemen B
+        Ft1 = data['Ft1'] #Gaya Tangensial Pada Elemen
+        Fr1 = data['Fr1'] #Gaya Radial Pada Elemen
+        Ft2 = data['Ft2'] #Gaya Tangensial Pada Elemen
+        Fr2 = data['Fr2'] #Gaya Radial Pada Elemen
+        CD = data['CD'] #Jarak Antara Bantalan C ke Elemen B
         if RadioDayaTorsi == "D":
-            P = float(request.POST['P']) #Daya
-            n = float(request.POST['n']) #Kecepatan Putar
+            P = data['P'] #Daya
+            n = data['n'] #Kecepatan Putar
             return N, P, n, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, material
         if RadioDayaTorsi == "T":
-            Torsi = float(request.POST['T'])
+            Torsi = data['T']
             return N, Torsi, Ft1, Fr1, Ft2, Fr2, AB, BC, CD, material
